@@ -182,8 +182,8 @@ public:
 
 	double getCreditHour() const
 	{
-		auto end = code.end();
-		return stod(static_cast<string>(*end));
+		auto end = code.at(*(code.end()));
+		return end;
 	}
 
 	double getPointEarned() const
@@ -257,7 +257,7 @@ int main()
 
 	cout << "Enter the following data: " << endl;
 	cout << "  Subject name => ";
-	cin >> _name;
+	getline(cin, _name);
 	cout << endl;
 
 	cout << "  Subject code => ";
