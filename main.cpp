@@ -59,7 +59,7 @@ public:
 		return code;
 	}
 
-	string getScore() const
+	double getScore() const
 	{
 		return score;
 	}
@@ -118,117 +118,127 @@ public:
 		{
 			return "E";
 		}
+
+		return "";
 	}
 
 	double getGradePoint(string _grade) const
 	{
-		if (_grade >= 90 && _grade < 100)
+		if (_grade == "A+")
 		{
 			return 4.00;
 		}
-		if (_grade >= 80 && _grade < 90)
+		if (_grade == "A")
 		{
 			return 4.00;
 		}
-		if (_grade >= 75 && _grade < 79)
+		if (_grade == "A-")
 		{
 			return 3.67;
 		}
-		if (_grade >= 70 && _grade < 75)
+		if (_grade == "B+")
 		{
 			return 3.33;
 		}
-		if (_grade >= 65 && _grade < 70)
+		if (_grade == "B")
 		{
 			return 3.00;
 		}
-		if (_grade >= 60 && _grade < 65)
+		if (_grade == "B-")
 		{
 			return 2.67;
 		}
-		if (_grade >= 55 && _grade < 60)
+		if (_grade == "C+")
 		{
 			return 2.33;
 		}
-		if (_grade >= 50 && _grade < 55)
+		if (_grade == "C")
 		{
 			return 2.00;
 		}
-		if (_grade >= 45 && _grade < 50)
+		if (_grade == "C-")
 		{
 			return 1.67;
 		}
-		if (_grade >= 40 && _grade < 45)
+		if (_grade == "D+")
 		{
 			return 1.33;
 		}
-		if (_grade >= 35 && _grade < 40)
+		if (_grade == "D")
 		{
 			return 1.00;
 		}
-		if (_grade >= 30 && _grade < 35)
+		if (_grade == "D-")
 		{
 			return 0.67;
 		}
-		if (_grade >= 0 && _grade < 30)
+		if (_grade == "E")
 		{
 			return 0.00;
 		}
+
+		return 0;
 	}
 
-	double getPointEarned(string _grade) const
+	double getCreditHour() const
 	{
-		if (_grade >= 90 && _grade < 100)
+		auto end = code.end();
+		return stod(static_cast<string>(*end));
+	}
+
+	double getPointEarned() const
+	{
+		if (score >= 90 && score < 100)
 		{
-			return 4.00 * static_cast<double>(code.end());
+			return 4.00 * getCreditHour();
 		}
-		if (_grade >= 80 && _grade < 90)
+		if (score >= 80 && score < 90)
 		{
-			return 4.00 * static_cast<double>(code.end());
+			return 4.00 * getCreditHour();
 		}
-		if (_grade >= 75 && _grade < 79)
+		if (score >= 75 && score < 79)
 		{
-			return 3.67 * static_cast<double>(code.end());
+			return 3.67 * getCreditHour();
 		}
-		if (_grade >= 70 && _grade < 75)
+		if (score >= 70 && score < 75)
 		{
-			return 3.33 * static_cast<double>(code.end());
+			return 3.33 * getCreditHour();
 		}
-		if (_grade >= 65 && _grade < 70)
+		if (score >= 65 && score < 70)
 		{
-			return 3.00 * static_cast<double>(code.end());
+			return 3.00 * getCreditHour();
 		}
-		if (_grade >= 60 && _grade < 65)
+		if (score >= 60 && score < 65)
 		{
-			return 2.67 * static_cast<double>(code.end());
+			return 2.67 * getCreditHour();
 		}
-		if (_grade >= 55 && _grade < 60)
+		if (score >= 55 && score < 60)
 		{
-			return 2.33 * static_cast<double>(code.end());
+			return 2.33 * getCreditHour();
 		}
-		if (_grade >= 50 && _grade < 55)
+		if (score >= 50 && score < 55)
 		{
-			return 2.00 * static_cast<double>(code.end());
+			return 2.00 * getCreditHour();
 		}
-		if (_grade >= 45 && _grade < 50)
+		if (score >= 45 && score < 50)
 		{
-			return 1.67 * static_cast<double>(code.end());
+			return 1.67 * getCreditHour();
 		}
-		if (_grade >= 40 && _grade < 45)
+		if (score >= 40 && score < 45)
 		{
-			return 1.33 * static_cast<double>(code.end());
+			return 1.33 * getCreditHour();
 		}
-		if (_grade >= 35 && _grade < 40)
+		if (score >= 35 && score < 40)
 		{
-			return 1.00 * static_cast<double>(code.end());
+			return 1.00 * getCreditHour();
 		}
-		if (_grade >= 30 && _grade < 35)
+		if (score >= 30 && score < 35)
 		{
-			return 0.67 * static_cast<double>(code.end());
+			return 0.67 * getCreditHour();
 		}
-		if (_grade >= 0 && _grade < 30)
+		if (score >= 0 && score < 30)
 		{
-			return 0.00 * static_cast<double>(code.end());
+			return 0.00 * getCreditHour();
 		}
 	}
 
@@ -241,18 +251,24 @@ public:
 
 int main()
 {
-	Subject sub;
+	string _name;
+	string _code;
+	double _score;
 
 	cout << "Enter the following data: " << endl;
 	cout << "  Subject name => ";
-	sub.setName(getline(cin, ));
+	cin >> _name;
 	cout << endl;
 
 	cout << "  Subject code => ";
+	cin >> _code;
 	cout << endl;
 
 	cout << "  Score earned => ";
+	cin >> _score;
 	cout << endl;
+
+	Subject sub(_name, _code, _score);
 
 	cout << endl
 		 << endl;
@@ -260,13 +276,13 @@ int main()
 	cout << "THE RESULT" << endl
 		 << endl;
 
-	cout << "Subject Code : " << endl;
-	cout << "Subject Name : " << endl;
-	cout << "Credit Hour  : " << endl;
-	cout << "Score Earned : " << endl;
-	cout << "Grade Earned : " << endl;
-	cout << "Grade Point  : " << endl;
-	cout << "Point Earned : " << endl;
+	cout << "Subject Code : " << sub.getCode() << endl;
+	cout << "Subject Name : " << sub.getName() << endl;
+	cout << "Credit Hour  : " << sub.getCreditHour() << endl;
+	cout << "Score Earned : " << sub.getScore() << endl;
+	cout << "Grade Earned : " << sub.getGradeEarned() << endl;
+	cout << "Grade Point  : " << sub.getGradePoint(sub.getGradeEarned()) << endl;
+	cout << "Point Earned : " << sub.getPointEarned() << endl;
 	cout << endl;
 
 	system("pause");
